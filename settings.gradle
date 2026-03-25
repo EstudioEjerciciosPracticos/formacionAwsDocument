@@ -1,0 +1,15 @@
+rootProject.name = 'formacion'
+
+include ':app-service'
+include ':model'
+include ':usecase'
+include ':postgres-adapter'
+include ':aws-adapter'
+include ':entry-point'
+
+project(':app-service').projectDir = file('./application/app-service')
+project(':model').projectDir = file('./domain/model')
+project(':usecase').projectDir = file('./domain/usecase')
+project(':postgres-adapter').projectDir = file('./infraestructure/driven-adapter/postgres-adapter')
+project(':aws-adapter').projectDir = file('./infraestructure/driven-adapter/aws-adapter')
+project(':entry-point').projectDir = file('./infraestructure/entry-point')
