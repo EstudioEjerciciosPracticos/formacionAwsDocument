@@ -1,0 +1,8 @@
+
+
+aws:
+  region: us-east-1
+  bucket: documentos-bucket
+  endpoint: http://localhost:4566
+  accessKey: test
+  secrerKey: test

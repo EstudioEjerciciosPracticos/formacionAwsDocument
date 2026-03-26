@@ -17,19 +17,19 @@ public class UseCaseBeanConfig {
         return new RegistrarDocumentoUseCase(documentoRepository);
     }
 
-    @Bean
+/*    @Bean
     public CargarDocumentoUseCase cargarDocumentoUseCase(DocumentoRepository documentoRepository, AlmacenamientoRepository almacenamientoRepository) {
         return new CargarDocumentoUseCase(documentoRepository, almacenamientoRepository);
-    }
+    }*/
 
     @Bean
     public ListarDocumentoUseCase listarDocumentoUseCase(DocumentoRepository documentoRepository) {
         return new ListarDocumentoUseCase(documentoRepository);
     }
 
-    @Bean
+/*    @Bean
     public GenerarUrlDescargaUseCase generarUrlDescargaUseCase(DocumentoRepository documentoRepository, AlmacenamientoRepository almacenamientoRepository) {
         return new GenerarUrlDescargaUseCase(documentoRepository, almacenamientoRepository);
-    }
+    }*/
 
 }
