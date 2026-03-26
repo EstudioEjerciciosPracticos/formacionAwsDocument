@@ -5,7 +5,7 @@ import co.com.iasaws.dto.response.DocumentoResponseDto;
 
 public class DocumentoRestMapper {
 
-    public static DocumentoResponseDto fromDomain(Documento documento){
+    public static DocumentoResponseDto toResponse(Documento documento){
         return DocumentoResponseDto.builder()
                 .id(documento.getId())
                 .nombre(documento.getNombreOriginal())

@@ -17,7 +17,7 @@ public class InfraestructureConfig {
 
     private final DocumentoJpaRepository documentoJpaRepository;
     private final S3Client s3Client;
-    private AwsS3Config awsS3Config;
+    private final AwsS3Config awsS3Config;
 
     @Bean
     public DocumentoRepository getDocumentoJpaRepository() {

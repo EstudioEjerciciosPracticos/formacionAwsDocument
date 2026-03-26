@@ -11,12 +11,8 @@ public class RegistrarDocumentoUseCase{
         this.documentoRepository = documentoRepository;
     }
 
-    public Documento registrar(RegistrarDocumentoCommand command) {
-        Documento documento = new Documento(
-                command.getClienteId(),
-                command.getNombreOriginal(),
-                command.getTipo()
-        );
+    public Documento registrar(Documento documento) {
+
         return documentoRepository.guardar(documento);
     }
 

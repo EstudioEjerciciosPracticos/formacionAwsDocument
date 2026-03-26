@@ -4,6 +4,7 @@ package co.com.iasaws.controller;
 import co.com.iasaws.Documento;
 import co.com.iasaws.dto.request.DocumentoRequestDto;
 import co.com.iasaws.dto.response.DocumentoResponseDto;
+import co.com.iasaws.mapper.DocumentoRestMapper;
 import co.com.iasaws.registrar.RegistrarDocumentoUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,12 +21,12 @@ public class DocumentoController {
 
     @PostMapping
     public DocumentoResponseDto registrarDocumento(@RequestBody DocumentoRequestDto documentoRequestDto){
-        Documento documento = registrarDocumentoUseCase.registrar(
+        Documento documento = new Documento(
                 documentoRequestDto.getClienteId(),
                 documentoRequestDto.getNombreArchivo(),
                 documentoRequestDto.getTipo()
-
         );
+        return DocumentoRestMapper.toResponse(registrarDocumentoUseCase.registrar(documento));
     }
 
 
