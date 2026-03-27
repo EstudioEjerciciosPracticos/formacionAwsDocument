@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: formacion
+
+
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/gestordearchivos
+    username: postgres
+    password: W300430f
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+
+aws:
+  region: us-east-1
+  bucket: documentos-bucket
+  endpoint: http://localhost:4566
+  accessKey: test
+  secrerKey: test
