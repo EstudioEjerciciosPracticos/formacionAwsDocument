@@ -5,9 +5,12 @@ import co.com.iasaws.gateway.AlmacenamientoRepository;
 import lombok.RequiredArgsConstructor;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
+import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignRequest;
+import software.amazon.awssdk.services.s3.presigner.model.PresignedGetObjectRequest;
 
-import java.io.InputStream;
 import java.time.Duration;
 
 @RequiredArgsConstructor
@@ -15,6 +18,7 @@ public class S3StorageAdapter implements AlmacenamientoRepository {
 
     private final S3Client s3Client;
     private final AwsS3Config awsS3Config;
+    private final S3Presigner s3Presigner;
 
     @Override
     public void subirArchivo(String storageKey, byte[] archivo, String contentType) {
@@ -37,7 +41,20 @@ public class S3StorageAdapter implements AlmacenamientoRepository {
 
     @Override
     public String generarUrlTemporal(String storageKey, Duration duracion) {
-        return "https://fake-url/" + storageKey;
+
+        GetObjectRequest getObjectRequest = GetObjectRequest.builder()
+                .bucket(awsS3Config.getBucket())
+                .key(storageKey)
+                .build();
+
+        GetObjectPresignRequest getObjectPresignRequest = GetObjectPresignRequest.builder()
+                .signatureDuration(duracion)
+                .getObjectRequest(getObjectRequest)
+                .build();
+
+        PresignedGetObjectRequest presignedGetObjectRequest = s3Presigner.presignGetObject(getObjectPresignRequest);
+
+        return presignedGetObjectRequest.url().toString();
     }
 
     @Override

@@ -3,6 +3,7 @@ package co.com.iasaws.controller;
 
 import co.com.iasaws.Documento;
 import co.com.iasaws.cargar.CargarDocumentoUseCase;
+import co.com.iasaws.descargar.GenerarUrlDescargaUseCase;
 import co.com.iasaws.dto.request.DocumentoRequestDto;
 import co.com.iasaws.dto.response.DocumentoResponseDto;
 import co.com.iasaws.mapper.DocumentoRestMapper;
@@ -22,6 +23,7 @@ public class DocumentoController {
 
     private final RegistrarDocumentoUseCase registrarDocumentoUseCase;
     private final CargarDocumentoUseCase cargarDocumentoUseCase;
+    private final GenerarUrlDescargaUseCase generarUrlDescargaUseCase;
 
     @PostMapping
     public DocumentoResponseDto registrarDocumento(@RequestBody DocumentoRequestDto documentoRequestDto){
@@ -48,6 +50,12 @@ public class DocumentoController {
         return DocumentoRestMapper.toResponse(documento);
     }
 
+    @GetMapping("/{id}/descargar")
+    public ResponseEntity<String> descargar(@PathVariable String id) {
 
+        String url = generarUrlDescargaUseCase.generarUrlDescarga(id);
+
+        return ResponseEntity.ok(url);
+    }
 
 }

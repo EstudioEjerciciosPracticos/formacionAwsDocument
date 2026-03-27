@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 @Configuration
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class InfraestructureConfig {
     private final DocumentoJpaRepository documentoJpaRepository;
     private final S3Client s3Client;
     private final AwsS3Config awsS3Config;
+    private final S3Presigner s3Presigner;
 
     @Bean
     public DocumentoRepository getDocumentoJpaRepository() {
@@ -26,6 +28,6 @@ public class InfraestructureConfig {
 
     @Bean
     public AlmacenamientoRepository almacenamientoRepository(){
-        return new S3StorageAdapter(s3Client, awsS3Config);
+        return new S3StorageAdapter(s3Client, awsS3Config, s3Presigner);
     }
 }

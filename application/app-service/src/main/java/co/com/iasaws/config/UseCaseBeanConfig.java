@@ -27,9 +27,9 @@ public class UseCaseBeanConfig {
         return new ListarDocumentoUseCase(documentoRepository);
     }
 
-/*    @Bean
+    @Bean
     public GenerarUrlDescargaUseCase generarUrlDescargaUseCase(DocumentoRepository documentoRepository, AlmacenamientoRepository almacenamientoRepository) {
         return new GenerarUrlDescargaUseCase(documentoRepository, almacenamientoRepository);
-    }*/
+    }
 
 }
