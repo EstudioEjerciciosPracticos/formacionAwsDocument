@@ -2,7 +2,6 @@ package co.com.iasaws.registrar;
 
 import co.com.iasaws.Documento;
 import co.com.iasaws.gateway.DocumentoRepository;
-import co.com.iasaws.registrar.command.RegistrarDocumentoCommand;
 
 public class RegistrarDocumentoUseCase{
     private final DocumentoRepository documentoRepository;

@@ -17,20 +17,18 @@ public class S3StorageAdapter implements AlmacenamientoRepository {
     private final AwsS3Config awsS3Config;
 
     @Override
-    public void subirArchivo(String storageKey, InputStream archivo) {
+    public void subirArchivo(String storageKey, byte[] archivo, String contentType) {
 
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
                 .bucket(awsS3Config.getBucket())
                 .key(storageKey)
+                .contentType(contentType)
                 .build();
 
         try {
             s3Client.putObject(
                     putObjectRequest,
-                    RequestBody.fromInputStream(
-                            archivo,
-                            archivo.available()
-                    )
+                    RequestBody.fromBytes(archivo)
             );
         } catch (Exception e) {
             throw new RuntimeException("Error subiendo archivos a S3" + e);

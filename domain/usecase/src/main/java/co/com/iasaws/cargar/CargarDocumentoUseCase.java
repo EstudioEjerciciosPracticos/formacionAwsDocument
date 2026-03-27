@@ -15,16 +15,26 @@ public class CargarDocumentoUseCase {
         this.almacenamientoRepository = almacenamientoRepository;
     }
 
-    public void cargar(String documentoId, InputStream archivo) {
-        Documento documento = documentoRepository.buscarDocumentoPorId( documentoId)
-                .orElseThrow( () -> new RuntimeException("Documento no encontrado") );
+
+    public Documento cargar(String documentoId, byte[] archivo, String contentType) {
+
+        Documento documento = documentoRepository.buscarDocumentoPorId(documentoId)
+                .orElseThrow(() -> new RuntimeException("Documento no encontrado"));
 
         try {
-            almacenamientoRepository.subirArchivo(documento.getStorageKey(), archivo);
+            almacenamientoRepository.subirArchivo(
+                    documento.getStorageKey(),
+                    archivo,
+                    contentType
+            );
+
             documento.marcarComoCargado();
-        }catch (Exception e){
+
+        } catch (Exception e) {
             documento.marcarComoError();
-            throw new RuntimeException( "Error al cargar Archivo", e );
+            throw new RuntimeException("Error al cargar archivo", e);
         }
+
+        return documentoRepository.guardar(documento);
     }
 }

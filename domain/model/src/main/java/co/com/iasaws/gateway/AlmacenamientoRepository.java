@@ -5,7 +5,7 @@ import java.time.Duration;
 
 public interface AlmacenamientoRepository {
 
-    void subirArchivo(String storageKey, InputStream archivo);
+    void subirArchivo(String storageKey, byte[] archivo, String contentType);
 
     String generarUrlTemporal(String storageKey, Duration duracion);
 
